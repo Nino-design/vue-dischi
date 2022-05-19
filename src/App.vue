@@ -1,20 +1,25 @@
 <template>
   <div id="app">
-    <AppHeader/>
+    <AppHeader />
+    <main>
+      <AppAlbum />
+    </main>
   </div>
 </template>
 
 <script>
-import AppHeader from './components/AppHeader.vue';
+import AppHeader from "./components/AppHeader.vue";
+import AppAlbum from "./components/AppAlbum.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     AppHeader,
-  }
-}
+    AppAlbum,
+  },
+};
 </script>
 
 <style lang="scss">
-@import "./style/common.scss"
+@import "./style/common.scss";
 </style>

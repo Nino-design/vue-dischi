@@ -1,7 +1,10 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~@fontsource/roboto/index.css";
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
 }
 
+img {
+    max-width: 100%;
+}
