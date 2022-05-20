@@ -1,6 +1,6 @@
 <template>
   <header class="container-fluid">
-  <img src="../img/download.jpg" alt="">
+  <img src="../img/spotify-icon-marilyn-scott-0.png" alt="">
   </header>
 </template>
 
