@@ -1,14 +1,6 @@
 <template>
   <section>
-  <div class="choose">
-  <select class="form-select form-select-sm container" aria-label=".form-select-sm example">
-  <option selected>Choose the genre</option>
-  <option value="1">Rock</option>
-  <option value="2">Pop</option>
-  <option value="3">Jazz</option>
-  <option value="3">Metal</option>
-</select>
-  </div>
+  <AppSelectGenre @genreSelected='saveSelected($event)'/>
     <div
       class="
         container
@@ -21,7 +13,7 @@
     >
       <div class="row row-cols-5">
         <AppAlbumCard
-          v-for="(element, index) in albums"
+          v-for="(element, index) in filterGenre"
           :key="index"
           :albumCardObject="element"
         />
@@ -32,17 +24,25 @@
 
 <script>
 import AppAlbumCard from "./AppAlbumCard.vue";
+import AppSelectGenre from "./AppSelectGenre.vue";
 import axios from "axios";
 export default {
   name: "AppAlbum",
   components: {
     AppAlbumCard,
+    AppSelectGenre,
   },
-  data() {
+  data: function() {
     return {
       albums: [],
+      selected: '',
     };
   },
+    methods: {
+      saveSelected: function(selectKey){
+        this.selected = selectKey;
+      }
+    },
   created() {
     axios
       .get("https://flynn.boolean.careers/exercises/api/array/music")
@@ -50,6 +50,15 @@ export default {
         this.albums = resp.data.response;
       });
   },
+  computed: {
+    filterGenre: function () {
+      const generalParam = this.selected.toLowerCase();
+      const filteredParam = this.albums.filter(element => {
+        return element.genre.toLowerCase().includes(generalParam);
+      });
+      return filteredParam;
+    },
+  }
 };
 </script>
 
@@ -57,8 +66,8 @@ export default {
 
 <style lang="scss" scoped>
 section {
-  height: 100%;
-  overflow-y: hidden;
+  height: 100vh;
+  overflow-y: scroll;
   background-color: rgba(30, 45, 59, 255);
 }
 </style>
